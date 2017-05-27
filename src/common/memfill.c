@@ -13,8 +13,8 @@ int t_memfill()
 		r = -1;
 	}
 	/* limit brk space */
-	if (t_setrlim(RLIMIT_DATA, 0) < 0)
-		r = -1;
+	//if (t_setrlim(RLIMIT_DATA, 0) < 0)
+	//	r = -1;
 	if (!r)
 		/* use up libc reserves if any */
 		while (malloc(1));

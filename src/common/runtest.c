@@ -20,7 +20,7 @@ static int start(char *wrap, char *argv[])
 
 	pid = fork();
 	if (pid == 0) {
-		t_setrlim(RLIMIT_STACK, 100*1024);
+		//t_setrlim(RLIMIT_STACK, 100*1024);
 		if (*wrap) {
 			argv--;
 			argv[0] = wrap;
@@ -63,16 +63,17 @@ int main(int argc, char *argv[])
 	if (optind >= argc)
 		usage(argv);
 	argv += optind;
-	sigemptyset(&set);
-	sigaddset(&set, SIGCHLD);
-	sigprocmask(SIG_BLOCK, &set, 0);
-	signal(SIGCHLD, handler);
+	//sigemptyset(&set);
+	//sigaddset(&set, SIGCHLD);
+	//sigprocmask(SIG_BLOCK, &set, 0);
+	//signal(SIGCHLD, handler);
 	pid = start(wrap, argv);
 	if (pid == -1) {
 		t_error("%s fork failed: %s\n", argv[0], strerror(errno));
 		t_printf("FAIL %s [internal]\n", argv[0]);
 		return -1;
 	}
+	/*
 	if (sigtimedwait(&set, 0, &(struct timespec){timeoutsec,0}) == -1) {
 		if (errno == EAGAIN)
 			timeout = 1;
@@ -81,6 +82,7 @@ int main(int argc, char *argv[])
 		if (kill(pid, SIGKILL) == -1)
 			t_error("%s kill failed: %s\n", argv[0], strerror(errno));
 	}
+	*/
 	if (waitpid(pid, &status, 0) != pid) {
 		t_error("%s waitpid failed: %s\n", argv[0], strerror(errno));
 		t_printf("FAIL %s [internal]\n", argv[0]);

@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include <sys/mman.h>
+//#include <sys/mman.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <limits.h>
@@ -11,6 +11,7 @@
 	#define MAP_ANONYMOUS 0
 #endif
 
+#if 0
 /* max mmap size, *start is the largest power-of-2 size considered */
 static size_t mmax(int fd, size_t *start)
 {
@@ -29,6 +30,7 @@ static size_t mmax(int fd, size_t *start)
 	}
 	return n & -PAGE_SIZE;
 }
+#endif
 
 /*
 fills the virtual memory with anonymous PROT_NONE mmaps,
@@ -37,6 +39,8 @@ the return value is the number of mappings or -1 on failure.
 */
 int t_vmfill(void **p, size_t *n, int len)
 {
+	return -1;
+	/*
 	int fd = MAP_ANONYMOUS ? -1 : open("/dev/zero", O_RDWR);
 	size_t start = SIZE_MAX/2 + 1;
 	size_t m;
@@ -56,4 +60,5 @@ int t_vmfill(void **p, size_t *n, int len)
 		}
 	}
 	return i;
+	*/
 }
