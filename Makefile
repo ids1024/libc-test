@@ -39,7 +39,7 @@ config.mak:
 -include config.mak
 
 define default_template
-$(1).BINS_TEMPL:=bin.exe bin-static.exe
+$(1).BINS_TEMPL:=bin.exe
 $(1).NAMES:=$$(filter $(1)/%,$$(NAMES))
 $(1).OBJS:=$$($(1).NAMES:%=$(B)/%.o)
 endef
